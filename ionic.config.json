@@ -1,0 +1,7 @@
+{
+  "name": "eritasks",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
