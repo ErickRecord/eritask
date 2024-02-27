@@ -1,0 +1,10 @@
+<section class="section-task">
+
+  <div *ngIf="tasks.length == 0">
+    <p>No hay actividades</p>
+  </div>
+
+  <div *ngFor="let task of tasks;">
+    <app-card [task]="task"></app-card>
+  </div>
+</section>

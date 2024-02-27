@@ -1,0 +1,26 @@
+form {
+  margin: 20px;
+
+  ion-input,
+  ion-textarea {
+    margin-bottom: 15px;
+  }
+
+  ion-checkbox {
+    --size: 32px;
+    --checkbox-background-checked: #6815ec;
+  }
+
+  ion-checkbox::part(container) {
+    border-radius: 6px;
+    border: 2px solid #6815ec;
+  }
+
+  .block {
+    display: block;
+  }
+
+  ion-button {
+    margin-top: 20px;
+  }
+}

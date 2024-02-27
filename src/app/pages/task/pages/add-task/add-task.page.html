@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/task"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Tarea</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+
+    <ion-input label="Nombre" label-placement="floating" formControlName="name" name="name" fill="outline"></ion-input>
+    <div *ngIf="taskForm.get('name')!.invalid && taskForm.get('name')!.touched">
+      <ion-text color="danger" padding-left>
+        <p *ngIf="taskForm.get('name')!.hasError('required')">El nombre es requerido.</p>
+      </ion-text>
+    </div>
+
+    <ion-input label="Descripción" label-placement="floating" formControlName="description" name="name"
+      fill="outline"></ion-input>
+    <div *ngIf="taskForm.get('description')!.invalid && taskForm.get('description')!.touched">
+      <ion-text color="danger" padding-left>
+        <p *ngIf="taskForm.get('description')!.hasError('required')">La descripción es requerida.</p>
+      </ion-text>
+    </div>
+
+    <ion-input label="Duración" label-placement="floating" formControlName="duration" name="duration" fill="outline"
+      placeholder="00:00 - 00:00"></ion-input>
+    <div *ngIf="taskForm.get('duration')!.invalid && taskForm.get('duration')!.touched">
+      <ion-text color="danger" padding-left>
+        <p *ngIf="taskForm.get('duration')!.hasError('required')">La duración es requerida.</p>
+        <p *ngIf="taskForm.get('duration')!.hasError('pattern')">El formato de la duración debe ser 00:00 - 00:00.</p>
+      </ion-text>
+    </div>
+    <div *ngIf="task != null" class="block">
+      <ion-checkbox (ionChange)="toggleIsDone($event)" formControlName="isDone">Terminado</ion-checkbox>
+    </div>
+
+
+
+
+    <div class="flex-buttons">
+      <ion-button *ngIf="task != null" color="danger" type="button" (click)="deleteTasks()">Eliminar</ion-button>
+      <ion-button type="submit" [disabled]="!taskForm.valid">Guardar</ion-button>
+
+    </div>
+  </form>
+
+
+</ion-content>

@@ -1,0 +1,37 @@
+<section>
+
+  
+  <div class="header-img">
+    <h3>Eri task</h3>
+    <img src="../../../../../assets/car.jpg" alt="Logo">
+  </div>
+  
+  <h2>Iniciar sesión</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    
+    <ion-input label="Correo" formControlName="email" label-placement="floating" fill="outline" placeholder="example@example.com"></ion-input>
+    <div *ngIf="form.get('email')!.invalid && form.get('email')!.touched">
+      <ion-text color="danger" padding-left>
+        <p *ngIf="form.get('email')!.hasError('required')">El correo es requerido.</p>
+        <p *ngIf="form.get('email')!.hasError('email')">Correo invalido.</p>
+      </ion-text>
+    </div>
+    <div *ngIf="isEmailValid">
+    <ion-input [type]="isObscure ? 'password' : 'text'" label="Contraseña" formControlName="password" label-placement="floating" fill="outline">
+      <ion-icon (click)="changeObscureText()" slot="end" [name]="isObscure ? 'eye-outline': 'eye-off-outline' " >
+      </ion-icon>
+  </ion-input>
+    </div>
+  
+    <div *ngIf="form.get('password')!.invalid && form.get('password')!.touched">
+      <ion-text color="danger" padding-left>
+        <p *ngIf="form.get('password')!.hasError('required')">La contraseña es requerida.</p>
+      </ion-text>
+    </div>
+    <ion-button class="forgot-password" fill="clear">Olvide mi contraseña</ion-button>
+    <ion-button class="submit" type="submit" [disabled]="form.get('email')!.invalid || isLoading">Iniciar sesión</ion-button>
+    <ion-button routerLink="/authentication/register" class="forgot-password" fill="clear">Crear cuenta</ion-button>
+  </form>
+
+</section>

@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar class="background-color-header">
+    <ion-title class="title">Lista de tareas</ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar class="background-color-header" style="width: 100%">
+    <ion-segment value="all">
+      <ion-segment-button value="all" routerLink="/task/">
+        <ion-label style="white-space: normal; ">Todas</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="done" routerLink="/task/done">
+        <ion-label style="white-space: normal; ">Hechas</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="toDo" routerLink="/task/todo">
+        <ion-label style="white-space: normal; ">Por hacer</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <router-outlet></router-outlet>
+</ion-content>

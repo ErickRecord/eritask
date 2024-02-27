@@ -24,3 +24,31 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+.section-task {
+    padding: 0 20px;
+    .button-section {
+        margin-top: 20px;
+        color: black;
+        display: flex;
+        justify-content: center;
+
+        ion-button {
+            --background-hover: #9ce0be;
+            --background-activated: #88f4be;
+            --background-focused: #88f4be;
+
+            --color: #000000;
+
+            --ripple-color: #e5b4f3;
+
+            --padding-top: 10px;
+            --padding-bottom: 10px;
+
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+    }
+
+}
