@@ -16,6 +16,30 @@ ion-datetime{
   margin: 0 auto;
 }
 
+
+
+ion-datetime::part(calendar-day) {
+  color: black;
+  border-radius: 0;
+  width: 50px;
+}
+
+
+
+
+// .calendar-day.calendar-day-active {
+//   display: none;
+// }
+
+.highlighted-date {
+  // background-color: #ffc0cb; /* Adjust background color as desired */
+  // color: #800080; /* Adjust text color as desired */
+
+  background-color: yellow !important;
+
+}
+
+
 .sub-title {
   p {
     font-size: 20px;

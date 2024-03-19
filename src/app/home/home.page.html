@@ -20,7 +20,11 @@
   <div class="sub-title">
     <p>Calendario de eventos</p>
   </div>
-  <ion-datetime></ion-datetime>
+  <ion-datetime
+  presentation="date"
+  value="2024-01-01"
+  [highlightedDates]="highlightedDates"
+  ></ion-datetime>
 
   <section class="add-task">
     <ion-button routerLink="/task">Registrar evento</ion-button>

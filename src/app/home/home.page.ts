@@ -7,6 +7,26 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
+  highlightedDates = [
+    {
+      date: '2024-01-22',
+      textColor: "#800080",
+      backgroundColor: "#ffc0cb"
+    },
+    {
+      date: '2024-01-21',
+      textColor: "#800080",
+      backgroundColor: "#ffc0cb",
+    },
+    {
+      date: '2024-01-23',
+      textColor: "#800080",
+      backgroundColor: "#ffc0cb",
+    },
+  ];
+
+
+
   constructor() {}
 
 }
