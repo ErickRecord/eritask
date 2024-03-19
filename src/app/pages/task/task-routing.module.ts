@@ -28,7 +28,12 @@ const routes: Routes = [
   {
     path: 'add-task',
     loadChildren: () => import('./pages/add-task/add-task.module').then(m => m.AddTaskPageModule)
+  },
+  {
+    path: 'task-date',
+    loadChildren: () => import('./pages/task-date/task-date.module').then( m => m.TaskDatePageModule)
   }
+
 ];
 
 @NgModule({
