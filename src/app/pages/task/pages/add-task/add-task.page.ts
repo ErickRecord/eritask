@@ -4,6 +4,7 @@ import { TaskModel } from 'src/models/task.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController, ToastController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -14,6 +15,8 @@ import { ActivatedRoute } from '@angular/router';
 export class AddTaskPage implements OnInit {
   task?: TaskModel;
   taskForm: FormGroup;
+  initialDate: string =  "";
+
   isDone: boolean = false; // Propiedad para almacenar el estado del checkbox
 
   constructor(
@@ -23,26 +26,43 @@ export class AddTaskPage implements OnInit {
     private toastController: ToastController,
     private route: ActivatedRoute
   ) {
+
     this.taskForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       description: ['', Validators.required],
-      duration: ['', [Validators.required, Validators.pattern('^\\d{2}:\\d{2} - \\d{2}:\\d{2}$')]],
+      datetimeControl: [null],
       isDone: [false]
     });
-
   }
+
+  dateTimeChanged(event: CustomEvent) {
+    const selectedDate: string = event.detail.value;
+    this.taskForm.controls["datetimeControl"].setValue(selectedDate);
+  }
+
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.task = this.taskService.getTask(+params['id'])
 
       if (this.task) {
+        const datepipe: DatePipe = new DatePipe('en-ES');
+        this.initialDate = this.task.datetime;
+        // const datetime = datepipe.transform(this.task.datetime, 'dd-MMM-YYYY h:mm a');
+        // this.taskForm.controls["datetimeControl"].setValue(datetime!.toISOString());
         // Asignar los valores al formulario solo si la tarea existe
+        
         this.taskForm.patchValue({
           name: this.task.name,
           description: this.task.description,
-          duration: this.task.duration,
+          datetimeControl: this.task.datetime,
           isDone: this.task.isDone
         });
+        // if (this.task.datetime) {
+        //   this.taskForm.patchValue({
+        //     datetimeControl: this.task.datetime
+        //   });
+        // }
+      
       }
     });
   }
@@ -50,7 +70,11 @@ export class AddTaskPage implements OnInit {
   onSubmit() {
     let name = this.taskForm.controls["name"];
     let descripcion = this.taskForm.controls["description"];
-    let duration = this.taskForm.controls["duration"];
+    let datetime = this.taskForm.controls["datetimeControl"];
+    if (datetime.value == null) {
+      datetime.setValue(new Date().toISOString());
+    }
+
     if (this.task == null) {
 
       let task: TaskModel = {
@@ -58,7 +82,7 @@ export class AddTaskPage implements OnInit {
         idUser: 0,
         name: name.value,
         description: descripcion.value,
-        duration: duration.value,
+        datetime: datetime.value,
         isDone: this.isDone
       };
       this.taskService.addTask(task);
@@ -67,7 +91,7 @@ export class AddTaskPage implements OnInit {
       // this.task.isDone = true;
       this.task.name = name.value
       this.task.description = descripcion.value
-      this.task.duration = duration.value
+      this.task.datetime = datetime.value
       this.task.isDone = this.isDone;
     }
     this.navCtrl.back();

@@ -25,18 +25,26 @@
       </ion-text>
     </div>
 
-    <ion-input label="Duración" label-placement="floating" formControlName="duration" name="duration" fill="outline"
-      placeholder="00:00 - 00:00"></ion-input>
-    <div *ngIf="taskForm.get('duration')!.invalid && taskForm.get('duration')!.touched">
-      <ion-text color="danger" padding-left>
-        <p *ngIf="taskForm.get('duration')!.hasError('required')">La duración es requerida.</p>
-        <p *ngIf="taskForm.get('duration')!.hasError('pattern')">El formato de la duración debe ser 00:00 - 00:00.</p>
-      </ion-text>
-    </div>
+
     <div *ngIf="task != null" class="block">
       <ion-checkbox (ionChange)="toggleIsDone($event)" formControlName="isDone">Terminado</ion-checkbox>
     </div>
 
+    <ion-datetime-button datetime="datetime"></ion-datetime-button>
+
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime
+        displayFormat="dd-MMM-YYYY h:mm a"
+      timezone="America/Mexico_City"
+      (ionChange)="dateTimeChanged($event)"
+      formControlName="datetimeControl"
+      id="datetime"
+      locale="en-GB"
+      hourCycle="h12"
+      ></ion-datetime>
+      </ng-template>
+    </ion-modal>
 
 
 
