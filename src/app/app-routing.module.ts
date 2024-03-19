@@ -17,7 +17,11 @@ const routes: Routes = [
   },
   {
     path: 'authentication',
-    loadChildren: () => import('./pages/authentication/authentication.module').then( m => m.AuthenticationPageModule)
+    loadChildren: () => import('./pages/authentication/authentication.module').then(m => m.AuthenticationPageModule)
+  },
+  {
+    path: 'exercises',
+    loadChildren: () => import('./exercises/exercises.module').then(m => m.ExercisesPageModule)
   },
 ];
 
