@@ -1,20 +1,30 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar class="background-color-header">
     <ion-title>
-      Blank
+      Inicio
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/authentication/login">
+        <ion-icon name="people-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <header>
+    <h1>Eri Tareas</h1>
+    <h2>Lleva la organización de tus eventos a un mejor nivel</h2>
+  </header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div class="sub-title">
+    <p>Calendario de eventos</p>
   </div>
+  <ion-datetime></ion-datetime>
+
+  <section class="add-task">
+    <ion-button routerLink="/task">Registrar evento</ion-button>
+  </section>
+
+
 </ion-content>

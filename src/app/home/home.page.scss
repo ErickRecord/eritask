@@ -1,27 +1,43 @@
-#container {
+header {
   text-align: center;
+  background-color: #88f4be;
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  h1 {
+    margin: 0;
+    padding: 10px 0;
+  }
+
+  h2 {
+    margin: 0;
+  }
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+ion-datetime{
+  margin: 0 auto;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+.sub-title {
+  p {
+    font-size: 20px;
+    margin: 10px 0px 10px 15px;
+  }
 }
 
-#container a {
-  text-decoration: none;
+.add-task {
+  ion-button {
+    width: 100%;
+  }
+}
+
+
+// .calendar-day.calendar-day-active {
+//   display: none;
+// }
+
+.highlighted-date {
+  // background-color: #ffc0cb; /* Adjust background color as desired */
+  // color: #800080; /* Adjust text color as desired */
+
+  background-color: yellow !important;
+
 }
