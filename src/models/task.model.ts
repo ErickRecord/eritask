@@ -3,6 +3,6 @@ export interface TaskModel{
     idUser: number;
     name:string;
     description:string;
-    duration: string;
+    datetime: string;
     isDone: boolean;
 }

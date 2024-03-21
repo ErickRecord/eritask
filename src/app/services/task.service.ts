@@ -13,7 +13,7 @@ export class TaskService {
       idUser: 1,
       name: "Programación",
       description: "Asistir a la reunion",
-      duration: "10:00 - 11:20",
+      datetime: "2024-03-04T18:44:26.108Z",
       isDone: false
     },
     {
@@ -21,7 +21,7 @@ export class TaskService {
       idUser: 2,
       name: "Gym",
       description: "Asistir al gimnasio",
-      duration: "05:00 - 07:00",
+      datetime: "2024-03-04T18:44:26.108Z",
       isDone: true
     },
   ];

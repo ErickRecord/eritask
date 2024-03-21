@@ -1,27 +1,85 @@
-#container {
+header {
   text-align: center;
+  background-color: #88f4be;
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  h1 {
+    margin: 0;
+    padding: 10px 0;
+  }
+
+  h2 {
+    margin: 0;
+  }
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+ion-datetime {
+  margin: 0 auto;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+.sub-title {
+  p {
+    font-size: 20px;
+    margin: 10px 0px 10px 15px;
+  }
 }
 
-#container a {
-  text-decoration: none;
+.add-task {
+  ion-button {
+    width: 100%;
+  }
+}
+
+.section-activities {
+  margin-left: 10px;
+
+  .activities {
+
+    .activity {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .box {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+    }
+
+    .start-classes-color {
+      background-color: #008000;
+    }
+
+    .re-registrations-color {
+      background-color: #11ce11;
+    }
+
+    .late-re-registrations-color {
+      background-color: #ff0000;
+    }
+
+    .drops-subjects-color {
+      background-color: #880606;
+    }
+
+    .graduate-ceremony-color {
+      background-color: #ffd700;
+    }
+
+    .end-classes-color {
+      background-color: #b42020;
+    }
+
+    .summer-courses-color {
+      background-color: #ffa500;
+    }
+
+    .suspension-color {
+      background-color: #5e5d5d;
+    }
+
+    .vacation-color {
+      background-color: #808080;
+    }
+  }
 }

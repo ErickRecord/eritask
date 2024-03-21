@@ -1,7 +1,7 @@
 <article (click)="details()">
   <div>
     <h2>{{ task.name }}</h2>
-    <p>{{ task.duration }}</p>
+    <p>{{ task.datetime | date:'dd-MMM-YYYY h:mm a' }}</p>
   </div>
   
   <ion-icon *ngIf="task.isDone" class="done" name="checkmark-outline"></ion-icon>
