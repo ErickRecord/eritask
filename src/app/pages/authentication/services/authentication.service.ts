@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthenticationService {
-
   constructor(
     private router: Router
   ) { }
@@ -25,6 +24,11 @@ export class AuthenticationService {
   async register() {
     // Register logic
     this.router.navigate(["/home"]);
+
+  }
+  async forgotPassword() {
+    // Register logic
+    this.router.navigate(["/authentication/login"]);
 
   }
 

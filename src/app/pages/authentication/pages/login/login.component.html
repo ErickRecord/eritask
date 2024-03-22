@@ -29,7 +29,7 @@
         <p *ngIf="form.get('password')!.hasError('required')">La contraseña es requerida.</p>
       </ion-text>
     </div>
-    <ion-button class="forgot-password" fill="clear">Olvide mi contraseña</ion-button>
+    <ion-button routerLink="/authentication/forgot-password"  class="forgot-password" fill="clear">Olvide mi contraseña</ion-button>
     <ion-button class="submit" type="submit" [disabled]="form.get('email')!.invalid || isLoading">Iniciar sesión</ion-button>
     <ion-button routerLink="/authentication/register" class="forgot-password" fill="clear">Crear cuenta</ion-button>
   </form>
