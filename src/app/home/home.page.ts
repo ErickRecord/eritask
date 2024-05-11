@@ -1,13 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { EmployeeModel } from 'src/models/employee.model';
+import { FirebaseService } from '../common/services/firebase.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
+  isLoggedIn: boolean = false;
 
+  employee: EmployeeModel[] = [];
+  isLoading: boolean = false;
+  newUser?: EmployeeModel = {
+    id: "",
+    controlNumber: "",
+    department: "",
+    email: "",
+    name: ""
+  };
   highlightedDates = [
     {
       date: '2024-01-22',
@@ -160,6 +173,12 @@ export class HomePage {
   ];
   selectedDate: string = "2024-01-01";
 
+  constructor(
+    private router: Router,
+    private firebaseService: FirebaseService,
+    private afAuth: AngularFireAuth
+  ) {
+  }
 
   onDateChange(event: any) {
     this.selectedDate = event.detail.value;
@@ -174,8 +193,47 @@ export class HomePage {
     }
   }
 
-  constructor(
-    private router: Router
-  ) { }
+  loadUsers() {
+    this.firebaseService.getCollectionChanges<EmployeeModel>('Employees').subscribe(employees => {
+      console.log(employees);
+      if (employees) {
+        this.employee = employees;
+      }
+    })
+  }
+
+  ngOnInit(): void {
+    this.afAuth.authState.subscribe(user => {
+      this.isLoggedIn = !!user;
+    });
+    this.loadUsers();
+  }
+
+  async logout() {
+    try {
+      await this.afAuth.signOut();
+      this.router.navigate(["/authentication"]);
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error);
+    }
+  }
+
+  clearForm(): void{
+    this.newUser ={
+      id: "",
+      controlNumber: "",
+      department: "",
+      email: "",
+      name: ""
+    };
+  }
+
+  async save() {
+    this.newUser!.id = this.firebaseService.createIdDoc();
+    this.isLoading = true;
+    await this.firebaseService.createDoc(this.newUser!, 'Employees',this.newUser!.id);
+    this.isLoading = false;
+    this.clearForm();
+  }
 
 }

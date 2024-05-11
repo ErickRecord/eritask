@@ -1,7 +1,10 @@
 <ion-header [translucent]="true">
   <ion-toolbar class="background-color-header">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
     <ion-title>
-      Inicio
+      Agenda
     </ion-title>
     <ion-buttons slot="end">
       <ng-container *ngIf="isLoggedIn; else loggedOut">
@@ -21,12 +24,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <header>
-    <h1>Eri Tareas</h1>
-    <h2>Lleva la organización de tus eventos a un mejor nivel</h2>
-  </header>
-  <h2>Agenda de contactos</h2>
-  <ion-list *ngFor="let item of employee">
+  <ion-list *ngFor="let item of employees">
     <ion-item>
 
       <ion-label>
@@ -40,17 +38,15 @@
     <div></div>
 
   </ion-list>
-
-  <ion-input label="Nombre" [(ngModel)]="newUser!.name" label-placement="floating" fill="outline"
-    placeholder="Enter text"></ion-input>
-  <ion-input label="Email" [(ngModel)]="newUser!.email" label-placement="floating" fill="outline"
-    placeholder="Enter text"></ion-input>
-  <ion-input label="Numero de control" [(ngModel)]="newUser!.controlNumber" label-placement="floating" fill="outline"
-    placeholder="Enter text"></ion-input>
-  <ion-input label="Departamento" [(ngModel)]="newUser!.department" label-placement="floating" fill="outline"
-    placeholder="Enter text"></ion-input>
-  <ion-button (click)="save()">Guardar</ion-button>
-
+  <form action="">
+    <ion-input label="Nombre" [(ngModel)]="employee!.name" name="name" label-placement="floating" fill="outline"></ion-input>
+    <ion-input label="Email" [(ngModel)]="employee!.email" name="email" label-placement="floating" fill="outline"></ion-input>
+    <ion-input label="Numero de control" [(ngModel)]="employee!.controlNumber" name="controlNumber" label-placement="floating"
+      fill="outline"></ion-input>
+    <ion-input label="Departamento" [(ngModel)]="employee!.department" name="department" label-placement="floating"
+      fill="outline"></ion-input>
+    <ion-button (click)="save()">Guardar</ion-button>
+  </form>
   <div style="margin: 10px;">
 
     <div *ngIf="isLoading">
