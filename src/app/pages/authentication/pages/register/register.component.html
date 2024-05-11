@@ -3,12 +3,21 @@
 
   <div class="header-img">
     <h3>Eri task</h3>
-    <img src="https://rodaticars.com/images/listings/2023-12/45013286-1702036310-514.jpg" alt="Logo">
+    <img src="https://autolab.com.co/wp-content/uploads/2022/04/Tsuru2008.png" alt="Logo">
   </div>
 
   <h2>Registrarse</h2>
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <ion-input label="Nombre" formControlName="name" label-placement="floating" fill="outline"
+      placeholder="Erick"></ion-input>
+    <div *ngIf="form.get('name')!.invalid && form.get('name')!.touched">
+      <ion-text color="danger" padding-left>
+        <p *ngIf="form.get('name')!.hasError('required')">El nombre es requerido.</p>
+        <p *ngIf="form.get('name')!.hasError('pattern')">El nombre solo lleva letras.</p>
+      </ion-text>
+    </div>
 
     <ion-input label="Correo" formControlName="email" label-placement="floating" fill="outline"
       placeholder="example@example.com"></ion-input>
@@ -18,14 +27,7 @@
         <p *ngIf="form.get('email')!.hasError('email')">Correo invalido.</p>
       </ion-text>
     </div>
-    <ion-input label="Nombre" formControlName="name" label-placement="floating" fill="outline"
-      placeholder="Erick"></ion-input>
-    <div *ngIf="form.get('name')!.invalid && form.get('name')!.touched">
-      <ion-text color="danger" padding-left>
-        <p *ngIf="form.get('name')!.hasError('required')">El nombre es requerido.</p>
-        <p *ngIf="form.get('name')!.hasError('pattern')">El nombre solo lleva letras.</p>
-      </ion-text>
-    </div>
+
     <ion-input [type]="isObscure ? 'password' : 'text'" label="Contraseña" formControlName="password"
       label-placement="floating" fill="outline">
       <ion-icon (click)="changeObscureText()" slot="end" [name]="isObscure ? 'eye-outline': 'eye-off-outline' ">

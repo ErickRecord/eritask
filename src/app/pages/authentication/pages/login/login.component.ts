@@ -13,7 +13,6 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   isObscure = true;
 
-  isEmailValid: boolean = false;
   isLoading = false;
   constructor(
     private formBuilder: FormBuilder,
@@ -36,16 +35,10 @@ export class LoginComponent implements OnInit {
 
   async onSubmit() {
     const email = this.form.controls["email"].value;
+    const password = this.form.controls["password"].value;
     try {
-      this.isLoading = true;
-      const isEmailValid = await this.authenticationService.fakeEmailValidation(email);
-      this.isLoading = false;
-      if (isEmailValid) {
-        this.isEmailValid = true;
-
-        if (this.form.controls["password"].valid) {
-          this.authenticationService.login();
-        }
+      if (this.form.controls["password"].valid) {
+        this.authenticationService.login(email, password);
       }
     } catch (error) {
       console.error("Error al validar el correo:", error);

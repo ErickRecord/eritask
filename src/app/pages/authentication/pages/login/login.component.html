@@ -17,12 +17,10 @@
         <p *ngIf="form.get('email')!.hasError('email')">Correo invalido.</p>
       </ion-text>
     </div>
-    <div *ngIf="isEmailValid">
-    <ion-input [type]="isObscure ? 'password' : 'text'" label="Contraseña" formControlName="password" label-placement="floating" fill="outline">
+    <ion-input [type]="isObscure ? 'password' : 'text'" label="Contraseña" formControlName="password" label-placement="floating" fill="outline" placeholder="****">
       <ion-icon (click)="changeObscureText()" slot="end" [name]="isObscure ? 'eye-outline': 'eye-off-outline' " >
       </ion-icon>
   </ion-input>
-    </div>
   
     <div *ngIf="form.get('password')!.invalid && form.get('password')!.touched">
       <ion-text color="danger" padding-left>
@@ -30,7 +28,7 @@
       </ion-text>
     </div>
     <ion-button routerLink="/authentication/forgot-password"  class="forgot-password" fill="clear">Olvide mi contraseña</ion-button>
-    <ion-button class="submit" type="submit" [disabled]="form.get('email')!.invalid || isLoading">Iniciar sesión</ion-button>
+    <ion-button class="submit" type="submit" [disabled]="!form.valid || isLoading">Iniciar sesión</ion-button>
     <ion-button routerLink="/authentication/register" class="forgot-password" fill="clear">Crear cuenta</ion-button>
   </form>
 
