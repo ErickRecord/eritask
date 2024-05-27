@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController, ToastController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { FirebaseService } from 'src/app/common/services/firebase.service';
+import { firstValueFrom } from 'rxjs';
 
 
 @Component({
@@ -14,8 +16,9 @@ import { DatePipe } from '@angular/common';
 })
 export class AddTaskPage implements OnInit {
   task?: TaskModel;
+
   taskForm: FormGroup;
-  initialDate: string =  "";
+  initialDate: string = "";
 
   isDone: boolean = false; // Propiedad para almacenar el estado del checkbox
 
@@ -24,75 +27,77 @@ export class AddTaskPage implements OnInit {
     private formBuilder: FormBuilder,
     private navCtrl: NavController, // Cierra la pagina actual
     private toastController: ToastController,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private firebaseService: FirebaseService
   ) {
 
     this.taskForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       description: ['', Validators.required],
-      datetimeControl: [null],
+      initialDate: ['', Validators.required],
+      initialTime: ['', Validators.required],
+      selectedColor: ['', Validators.required],
       isDone: [false]
     });
   }
 
-  dateTimeChanged(event: CustomEvent) {
-    const selectedDate: string = event.detail.value;
-    this.taskForm.controls["datetimeControl"].setValue(selectedDate);
-  }
-
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.task = this.taskService.getTask(+params['id'])
-
-      if (this.task) {
-        const datepipe: DatePipe = new DatePipe('en-ES');
-        this.initialDate = this.task.datetime;
-        // const datetime = datepipe.transform(this.task.datetime, 'dd-MMM-YYYY h:mm a');
-        // this.taskForm.controls["datetimeControl"].setValue(datetime!.toISOString());
-        // Asignar los valores al formulario solo si la tarea existe
-        
-        this.taskForm.patchValue({
-          name: this.task.name,
-          description: this.task.description,
-          datetimeControl: this.task.datetime,
-          isDone: this.task.isDone
+      if (params['id']) {
+        this.taskService.getTask(params['id']).subscribe(task => {
+          // Si existe la tarea le asigno la tarea a los inputs
+          if (task) {
+            this.task = task;
+            this.initialDate = this.task.initialDate;
+            this.taskForm.patchValue({
+              name: this.task.name,
+              description: this.task.description,
+              initialDate: this.task.initialDate,
+              initialTime: this.task.initialTime,
+              isDone: this.task.isDone,
+              selectedColor: this.task.color
+            });
+          }
         });
-        // if (this.task.datetime) {
-        //   this.taskForm.patchValue({
-        //     datetimeControl: this.task.datetime
-        //   });
-        // }
-      
+
       }
+
     });
   }
 
-  onSubmit() {
-    let name = this.taskForm.controls["name"];
-    let descripcion = this.taskForm.controls["description"];
-    let datetime = this.taskForm.controls["datetimeControl"];
-    if (datetime.value == null) {
-      datetime.setValue(new Date().toISOString());
-    }
+  async onSubmit() {
+    const user = await firstValueFrom(this.firebaseService.getUserInfo());
 
+    let name = this.taskForm.controls["name"].value;
+    let description = this.taskForm.controls["description"].value;
+    let initialDate = this.taskForm.controls["initialDate"].value;
+    let initialTime = this.taskForm.controls["initialTime"].value;
+    let selectedColor = this.taskForm.controls["selectedColor"].value;
+    // Si la tarea es nula se crea la tarea
     if (this.task == null) {
-
+      const idTask = this.firebaseService.createIdDoc();
       let task: TaskModel = {
-        idTask: 0,
-        idUser: 0,
-        name: name.value,
-        description: descripcion.value,
-        datetime: datetime.value,
-        isDone: this.isDone
+        idTask: idTask,
+        idUser: user?.uid!,
+        name: name,
+        description: description,
+        initialDate: initialDate,
+        initialTime: initialTime,
+        isDone: this.isDone,
+        color: selectedColor
       };
       this.taskService.addTask(task);
       this.snackBar("Tarea Agregada");
+      // Caso contrario se edita
     } else {
-      // this.task.isDone = true;
-      this.task.name = name.value
-      this.task.description = descripcion.value
-      this.task.datetime = datetime.value
+      this.task.name = name
+      this.task.description = description
+      this.task.initialDate = initialDate
+      this.task.initialTime = initialDate
+
       this.task.isDone = this.isDone;
+      this.taskService.updateTask(this.task.idTask, this.task);
+      this.snackBar("Tarea Actualizada");
     }
     this.navCtrl.back();
 
@@ -112,9 +117,15 @@ export class AddTaskPage implements OnInit {
   }
 
   deleteTasks() {
-    this.snackBar("Tarea eliminada");
-    this.taskService.deleteTask(this.task?.idTask!)
     this.navCtrl.back();
+    try {
+      this.taskService.deleteTask(this.task?.idTask!)
+    } catch (_) { }
+    this.snackBar("Tarea eliminada");
   }
 
+  changeColor(event: any) {
+    const selectedColor = event.target.value;
+    this.taskForm.get('selectedColor')!.setValue(selectedColor);
+  }
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TaskService } from 'src/app/services/task.service';
+import { TaskModel } from 'src/models/task.model';
 
 @Component({
   selector: 'app-task-date',
@@ -9,16 +11,29 @@ import { ActivatedRoute } from '@angular/router';
 export class TaskDatePage implements OnInit {
 
   date: string = "";
-
+  tasks: TaskModel[] = [];
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    private taskService: TaskService
+  ) { }
 
-  ) {}
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.date = params["date"];
 
-  ngOnInit() {
-  this.route.queryParams.subscribe(params=>{
-    this.date = params["date"];
-  });
+      this.taskService.getAllTasksByDate(this.date).subscribe(tasks => {
+        if (tasks) {
+          this.tasks = tasks;
+        }
+      })
+    });
+  }
+
+
+  details(idTask: string) {
+    this.router.navigate(["task/add-task/", idTask]);
+
   }
 
 }

@@ -15,8 +15,9 @@ export class TodoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.tasks = this.taskService.getAllNotDoneTasks()
-    
+    this.taskService.getAllNotDoneTasks().subscribe(tasks => {
+      this.tasks = tasks;
+    });
   }
 
 }

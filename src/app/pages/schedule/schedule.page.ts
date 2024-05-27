@@ -30,7 +30,6 @@ export class SchedulePage implements OnInit {
   }
   loadUsers() {
     this.firebaseService.getCollectionChanges<EmployeeModel>('Employees').subscribe(employees => {
-      console.log(employees);
       if (employees) {
         this.employees = employees;
       }
@@ -53,8 +52,8 @@ export class SchedulePage implements OnInit {
     }
   }
 
-  clearForm(): void{
-    this.employee ={
+  clearForm(): void {
+    this.employee = {
       id: "",
       controlNumber: "",
       department: "",
@@ -66,7 +65,7 @@ export class SchedulePage implements OnInit {
   async save() {
     this.employee!.id = this.firebaseService.createIdDoc();
     this.isLoading = true;
-    await this.firebaseService.createDoc(this.employee!, 'Employees',this.employee!.id);
+    await this.firebaseService.createDoc(this.employee!, 'Employees', this.employee!.id);
     this.isLoading = false;
     this.clearForm();
   }

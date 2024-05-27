@@ -21,42 +21,73 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <header>
-    <h1>Eri Tareas</h1>
-    <h2>Lleva la organización de tus eventos a un mejor nivel</h2>
-  </header>
-  <h2>Agenda de contactos</h2>
-  <ion-list *ngFor="let item of employee">
-    <ion-item>
+  <ion-datetime (ionChange)="onDateChange($event)" color="black" presentation="date" value="2024-05-01"
+  [highlightedDates]="highlightedDates"></ion-datetime>
 
-      <ion-label>
-        <p>Nombre: {{item.name}}</p>
-        <p>Email: {{item.email}}</p>
-        <p>No control: {{item.controlNumber}}</p>
-        <p>Departamento: {{item.department}}</p>
-      </ion-label>
-    </ion-item>
+<section class="add-task">
+  <ion-button routerLink="/task">Registrar evento</ion-button>
+</section>
+<section class="add-task">
+  <ion-button routerLink="/schedule">Agenda</ion-button>
+</section>
 
-    <div></div>
-
-  </ion-list>
-
-  <ion-input label="Nombre" [(ngModel)]="newUser!.name" label-placement="floating" fill="outline"
-    placeholder="Enter text"></ion-input>
-  <ion-input label="Email" [(ngModel)]="newUser!.email" label-placement="floating" fill="outline"
-    placeholder="Enter text"></ion-input>
-  <ion-input label="Numero de control" [(ngModel)]="newUser!.controlNumber" label-placement="floating" fill="outline"
-    placeholder="Enter text"></ion-input>
-  <ion-input label="Departamento" [(ngModel)]="newUser!.department" label-placement="floating" fill="outline"
-    placeholder="Enter text"></ion-input>
-  <ion-button (click)="save()">Guardar</ion-button>
-
-  <div style="margin: 10px;">
-
-    <div *ngIf="isLoading">
-      <ion-spinner name="bubbles"></ion-spinner>
+<section class="section-activities">
+  <h2>Actividades</h2>
+  <article class="activities">
+    <div class="activity">
+      <div class="box start-classes-color"></div>
+      <p>Inicio de clases</p>
     </div>
+  </article>
+  <article class="activities">
+    <div class="activity">
+      <div class="box re-registrations-color"></div>
+      <p>Reinscripciones</p>
+    </div>
+  </article>
+  <article class="activities">
+    <div class="activity">
+      <div class="box late-re-registrations-color"></div>
+      <p>Reinscripciones tardías</p>
+    </div>
+  </article>
+  <article class="activities">
+    <div class="activity">
+      <div class="box drops-subjects-color"></div>
+      <p>Bajas de materias (Fecha Limite)</p>
+    </div>
+  </article>
+  <article class="activities">
+    <div class="activity">
+      <div class="box graduate-ceremony-color"></div>
+      <p>Ceremonia de egresados</p>
+    </div>
+  </article>
+  <article class="activities">
+    <div class="activity">
+      <div class="box end-classes-color"></div>
+      <p>Fin de clases</p>
+    </div>
+  </article>
+  <article class="activities">
+    <div class="activity">
+      <div class="box summer-courses-color"></div>
+      <p>Cursos de verano</p>
+    </div>
+  </article>
+  <article class="activities">
+    <div class="activity">
+      <div class="box suspension-color"></div>
+      <p>Suspension, dia inhábil</p>
+    </div>
+  </article>
+  <article class="activities">
+    <div class="activity">
+      <div class="box vacation-color"></div>
+      <p>Vacaciones</p>
+    </div>
+  </article>
+</section>
 
-  </div>
 
 </ion-content>
