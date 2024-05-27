@@ -4,85 +4,90 @@
       Inicio
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button routerLink="/authentication/login">
-        <ion-icon name="people-outline"></ion-icon>
-      </ion-button>
+      <ng-container *ngIf="isLoggedIn; else loggedOut">
+        <!-- Si el usuario está autenticado, mostrar el botón de cierre de sesión -->
+        <ion-button (click)="logout()">
+          <ion-icon name="log-out-outline"></ion-icon>
+        </ion-button>
+      </ng-container>
+      <ng-template #loggedOut>
+        <!-- Si el usuario no está autenticado, mostrar el botón de inicio de sesión -->
+        <ion-button routerLink="/authentication/login">
+          <ion-icon name="people-outline"></ion-icon>
+        </ion-button>
+      </ng-template>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <header>
-    <h1>Eri Tareas</h1>
-    <h2>Lleva la organización de tus eventos a un mejor nivel</h2>
-  </header>
+  <ion-datetime (ionChange)="onDateChange($event)" color="black" presentation="date" value="2024-05-01"
+  [highlightedDates]="highlightedDates"></ion-datetime>
 
-  <div class="sub-title">
-    <p>Calendario de eventos</p>
-  </div>
-  <ion-datetime (ionChange)="onDateChange($event)" color="black" presentation="date" value="2024-01-01"
-    [highlightedDates]="highlightedDates"></ion-datetime>
+<section class="add-task">
+  <ion-button routerLink="/task">Registrar evento</ion-button>
+</section>
+<section class="add-task">
+  <ion-button routerLink="/schedule">Agenda</ion-button>
+</section>
 
-  <section class="add-task">
-    <ion-button routerLink="/task">Registrar evento</ion-button>
-  </section>
+<section class="section-activities">
+  <h2>Actividades</h2>
+  <article class="activities">
+    <div class="activity">
+      <div class="box start-classes-color"></div>
+      <p>Inicio de clases</p>
+    </div>
+  </article>
+  <article class="activities">
+    <div class="activity">
+      <div class="box re-registrations-color"></div>
+      <p>Reinscripciones</p>
+    </div>
+  </article>
+  <article class="activities">
+    <div class="activity">
+      <div class="box late-re-registrations-color"></div>
+      <p>Reinscripciones tardías</p>
+    </div>
+  </article>
+  <article class="activities">
+    <div class="activity">
+      <div class="box drops-subjects-color"></div>
+      <p>Bajas de materias (Fecha Limite)</p>
+    </div>
+  </article>
+  <article class="activities">
+    <div class="activity">
+      <div class="box graduate-ceremony-color"></div>
+      <p>Ceremonia de egresados</p>
+    </div>
+  </article>
+  <article class="activities">
+    <div class="activity">
+      <div class="box end-classes-color"></div>
+      <p>Fin de clases</p>
+    </div>
+  </article>
+  <article class="activities">
+    <div class="activity">
+      <div class="box summer-courses-color"></div>
+      <p>Cursos de verano</p>
+    </div>
+  </article>
+  <article class="activities">
+    <div class="activity">
+      <div class="box suspension-color"></div>
+      <p>Suspension, dia inhábil</p>
+    </div>
+  </article>
+  <article class="activities">
+    <div class="activity">
+      <div class="box vacation-color"></div>
+      <p>Vacaciones</p>
+    </div>
+  </article>
+</section>
 
-  <section class="section-activities">
-    <h2>Actividades</h2>
-    <article class="activities">
-      <div class="activity">
-        <div class="box start-classes-color"></div>
-        <p>Inicio de clases</p>
-      </div>
-    </article>
-    <article class="activities">
-      <div class="activity">
-        <div class="box re-registrations-color"></div>
-        <p>Reinscripciones</p>
-      </div>
-    </article>
-    <article class="activities">
-      <div class="activity">
-        <div class="box late-re-registrations-color"></div>
-        <p>Reinscripciones tardías</p>
-      </div>
-    </article>
-    <article class="activities">
-      <div class="activity">
-        <div class="box drops-subjects-color"></div>
-        <p>Bajas de materias (Fecha Limite)</p>
-      </div>
-    </article>
-    <article class="activities">
-      <div class="activity">
-        <div class="box graduate-ceremony-color"></div>
-        <p>Ceremonia de egresados</p>
-      </div>
-    </article>
-    <article class="activities">
-      <div class="activity">
-        <div class="box end-classes-color"></div>
-        <p>Fin de clases</p>
-      </div>
-    </article>
-    <article class="activities">
-      <div class="activity">
-        <div class="box summer-courses-color"></div>
-        <p>Cursos de verano</p>
-      </div>
-    </article>
-    <article class="activities">
-      <div class="activity">
-        <div class="box suspension-color"></div>
-        <p>Suspension, dia inhábil</p>
-      </div>
-    </article>
-    <article class="activities">
-      <div class="activity">
-        <div class="box vacation-color"></div>
-        <p>Vacaciones</p>
-      </div>
-    </article>
-  </section>
 
 </ion-content>

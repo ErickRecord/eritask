@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "eritasks": {
+      "hosting": {
+        "app": [
+          "eritasks"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "eritasks"
+  }
+}

@@ -1,0 +1,26 @@
+article {
+    margin: 10px;
+    border-bottom: 1px solid #d6daea;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    p {
+        color: #a6a7a7;
+        font-weight: 400;
+        margin-bottom: 20px;
+    }
+
+    .done{
+        color: green;
+        font-size: 40px;
+    }
+    .not-done{
+        color: red;
+        font-size: 40px;
+    }
+
+    img {
+        width: 30px;
+    }
+}

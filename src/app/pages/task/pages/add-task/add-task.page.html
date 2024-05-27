@@ -24,29 +24,33 @@
         <p *ngIf="taskForm.get('description')!.hasError('required')">La descripción es requerida.</p>
       </ion-text>
     </div>
-
+    <ion-item>
+      <ion-input formControlName="initialDate" name="initialDate" type="date"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input formControlName="initialTime" name="initialTime" type="time"></ion-input>
+    </ion-item>
+    <ion-list>
+      <ion-item>
+        <!-- Lo guardo en hexadecimal por que este sera el color que tendra el calendario -->
+        <ion-select aria-label="Fruit" interface="popover" placeholder="Selecciona" formControlName="selectedColor"
+          name="selectedColor">
+          <ion-select-option value="#008000">Inicio de clases</ion-select-option>
+          <ion-select-option value="#11ce11">Reinscripciones</ion-select-option>
+          <ion-select-option value="#ff0000">Reinscripciones tardías</ion-select-option>
+          <ion-select-option value="#880606">Bajas de materias (Fecha Límite)</ion-select-option>
+          <ion-select-option value="#ffd700">Ceremonia de egresados</ion-select-option>
+          <ion-select-option value="#b42020">Fin de clases</ion-select-option>
+          <ion-select-option value="#ffa500">Cursos de verano</ion-select-option>
+          <ion-select-option value="#5e5d5d">Suspensión, día inhábil</ion-select-option>
+          <ion-select-option value="#808080">Vacaciones</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
 
     <div *ngIf="task != null" class="block">
       <ion-checkbox (ionChange)="toggleIsDone($event)" formControlName="isDone">Terminado</ion-checkbox>
     </div>
-
-    <ion-datetime-button datetime="datetime"></ion-datetime-button>
-
-    <ion-modal [keepContentsMounted]="true">
-      <ng-template>
-        <ion-datetime
-        displayFormat="dd-MMM-YYYY h:mm a"
-      timezone="America/Mexico_City"
-      (ionChange)="dateTimeChanged($event)"
-      formControlName="datetimeControl"
-      id="datetime"
-      locale="en-GB"
-      hourCycle="h12"
-      ></ion-datetime>
-      </ng-template>
-    </ion-modal>
-
-
 
     <div class="flex-buttons">
       <ion-button *ngIf="task != null" color="danger" type="button" (click)="deleteTasks()">Eliminar</ion-button>

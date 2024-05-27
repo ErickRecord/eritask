@@ -14,7 +14,9 @@ export class AllComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.tasks = this.taskService.getAllTasks()
+    this.taskService.getAllTasks().subscribe(tasks => {
+      this.tasks = tasks;
+    })
   }
 
 }

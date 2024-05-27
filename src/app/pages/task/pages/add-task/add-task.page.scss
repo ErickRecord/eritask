@@ -25,3 +25,59 @@ form {
     margin-top: 20px;
   }
 }
+
+
+.section-activities {
+  margin-left: 10px;
+
+  .activities {
+
+    .activity {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .box {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+    }
+
+    .start-classes-color {
+      background-color: #008000;
+    }
+
+    .re-registrations-color {
+      background-color: #11ce11;
+    }
+
+    .late-re-registrations-color {
+      background-color: #ff0000;
+    }
+
+    .drops-subjects-color {
+      background-color: #880606;
+    }
+
+    .graduate-ceremony-color {
+      background-color: #ffd700;
+    }
+
+    .end-classes-color {
+      background-color: #b42020;
+    }
+
+    .summer-courses-color {
+      background-color: #ffa500;
+    }
+
+    .suspension-color {
+      background-color: #5e5d5d;
+    }
+
+    .vacation-color {
+      background-color: #808080;
+    }
+  }
+}

@@ -14,7 +14,9 @@ export class DoneComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.tasks = this.taskService.getAllDoneTasks()
+    this.taskService.getAllDoneTasks().subscribe(tasks => {
+      this.tasks = tasks;
+    });
   }
 
 }

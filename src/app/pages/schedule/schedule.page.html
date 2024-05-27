@@ -1,0 +1,58 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="background-color-header">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Agenda
+    </ion-title>
+    <ion-buttons slot="end">
+      <ng-container *ngIf="isLoggedIn; else loggedOut">
+        <!-- Si el usuario está autenticado, mostrar el botón de cierre de sesión -->
+        <ion-button (click)="logout()">
+          <ion-icon name="log-out-outline"></ion-icon>
+        </ion-button>
+      </ng-container>
+      <ng-template #loggedOut>
+        <!-- Si el usuario no está autenticado, mostrar el botón de inicio de sesión -->
+        <ion-button routerLink="/authentication/login">
+          <ion-icon name="people-outline"></ion-icon>
+        </ion-button>
+      </ng-template>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list *ngFor="let item of employees">
+    <ion-item>
+
+      <ion-label>
+        <p>Nombre: {{item.name}}</p>
+        <p>Email: {{item.email}}</p>
+        <p>No control: {{item.controlNumber}}</p>
+        <p>Departamento: {{item.department}}</p>
+      </ion-label>
+    </ion-item>
+
+    <div></div>
+
+  </ion-list>
+  <form action="">
+    <ion-input label="Nombre" [(ngModel)]="employee!.name" name="name" label-placement="floating" fill="outline"></ion-input>
+    <ion-input label="Email" [(ngModel)]="employee!.email" name="email" label-placement="floating" fill="outline"></ion-input>
+    <ion-input label="Numero de control" [(ngModel)]="employee!.controlNumber" name="controlNumber" label-placement="floating"
+      fill="outline"></ion-input>
+    <ion-input label="Departamento" [(ngModel)]="employee!.department" name="department" label-placement="floating"
+      fill="outline"></ion-input>
+    <ion-button (click)="save()">Guardar</ion-button>
+  </form>
+  <div style="margin: 10px;">
+
+    <div *ngIf="isLoading">
+      <ion-spinner name="bubbles"></ion-spinner>
+    </div>
+
+  </div>
+
+</ion-content>

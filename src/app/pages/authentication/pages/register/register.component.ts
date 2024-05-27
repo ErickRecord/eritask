@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
+import { UserModel } from 'src/models/user.model';
 
 @Component({
   selector: 'app-register',
@@ -38,9 +39,17 @@ export class RegisterComponent {
     this.isObscure = !this.isObscure;
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.form.valid) {
-      this.authentication.register()
+      const email = this.form.get('email')?.value ?? "";
+      const password = this.form.get('password')?.value ?? "";
+      const name = this.form.get('name')?.value ?? "";
+      let user: UserModel = {
+        name,
+        email,
+        password
+      };
+      await this.authentication.register(user);
     }
   }
 }

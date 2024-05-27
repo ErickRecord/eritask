@@ -1,9 +1,9 @@
 <article (click)="details()">
   <div>
     <h2>{{ task.name }}</h2>
-    <p>{{ task.datetime | date:'dd-MMM-YYYY h:mm a' }}</p>
+    <p>{{ task.initialDate | date:'dd-MMM-YYYY' }}</p>
   </div>
-  
+
   <ion-icon *ngIf="task.isDone" class="done" name="checkmark-outline"></ion-icon>
   <ion-icon *ngIf="!task.isDone" class="not-done" name="close-outline"></ion-icon>
 </article>

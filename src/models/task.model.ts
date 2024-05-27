@@ -1,8 +1,10 @@
-export interface TaskModel{
-    idTask:number,
-    idUser: number;
-    name:string;
-    description:string;
-    datetime: string;
+export interface TaskModel {
+    idTask: string,
+    idUser: string;
+    name: string;
+    description: string;
+    initialDate: string;
+    initialTime: string;
     isDone: boolean;
+    color: string
 }
